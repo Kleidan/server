@@ -1,10 +1,11 @@
-const app = require('./app.js');
-var a = { asd: 'asd' };
+const OperatingSystem = require('os');
+const totalMemoryInGB = OperatingSystem.totalmem() / 1024 / 1024 / 1024;
+const totalFreeMemoryInGB = OperatingSystem.freemem() / 1024 / 1024 / 1024;
+const osName = OperatingSystem.version();
+const osVersion = OperatingSystem.release();
+const osType = OperatingSystem.type();
+const host = OperatingSystem.hostname();
+const architecture = OperatingSystem.arch();
+const memoryInfo = { total: `${Math.round(totalMemoryInGB)} GB`, free: `${Math.round(totalFreeMemoryInGB)} GB`, name: `${osName}`, version: `${osVersion}`, osType: `${osType}`, host: `${host}`, architecture: `${architecture}` };
 
-app.App();
-
-const rtn = setTimeout(() => {
-  console.log('a:', a);
-}, 3000);
-
-clearTimeout(rtn)
+console.table(memoryInfo);
